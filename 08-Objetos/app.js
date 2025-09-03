@@ -7,6 +7,7 @@ console.log(b);
 const c = new Object();
 console.log(c);
 
+// Este es un objeto literal
 const fede = {
 	nombre: "Federico",
 	apellido: "Lazarte",

@@ -39,3 +39,49 @@ var funcionExpresada = function() {
 }
 
 funcionExpresada();
+
+// Funciones flecha
+
+const sumar = (a, b) => a + b;
+
+// Si la función tiene un solo parámetro, los paréntesis son opcinales
+const cuadrado = x => x * x;
+
+// Si la función no tiene argumentos, se usan paréntesis vacíos
+const saludarFlecha = () => "Hola";
+
+// Si la función tiene varios parámetros, se usan paréntesis
+const sumar2 = (a, b) => a + b;
+
+// Si a función tiene varias líneas, se usan llaves y se necesita un return explícita
+const sumar3 = (a, b) => {
+	const res = a + b;
+	return res;
+}
+
+// Funciones más compactas
+const nums = [1, 2, 3];
+const dobles = nums.map(num => num * 2);
+console.log(dobles); // [2, 4, 6]
+
+const persona = {
+	nombre: "Juan",
+	saludar: function() {
+		setTimeout(() => {
+			console.log(`Hola, soy ${this.nombre}`);
+		}, 1000);
+	}
+};
+persona.saludar(); // "Hola, soy Juan" (el this se refiere a persona)
+
+const mostrarArgumentos = (...args) => {
+	console.log(args);
+};
+mostrarArgumentos(1, 2, 3); // [1, 2, 3]
+
+// No tienen prototype
+const funcionTradicional = function() {};
+const arrowFunction = () => {};
+
+console.log(funcionTradicional.prototype); // { constructor: f }
+console.log(arrowFunction.prototype); // undefined
