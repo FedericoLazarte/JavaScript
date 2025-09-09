@@ -85,3 +85,40 @@ const arrowFunction = () => {};
 
 console.log(funcionTradicional.prototype); // { constructor: f }
 console.log(arrowFunction.prototype); // undefined
+
+// Función anónima Autoejecutable
+// Siempre que tengamos una función anónima cerrarla con ;
+
+// Clásica
+(function(){
+	console.log('Mi primer IIFE');
+})();
+
+(function(){
+	console.log('Mi segunda IIFE');
+})();
+
+(function(d, w, c){
+	console.log('Mi primer IIFE');
+	console.log(d);
+	console.log(w);
+	console.log(c);
+	c.log('Este es un console.log');
+})(document, window, console);
+
+
+// La Crockford (JavaScript The Good Parts)
+((function () {
+	console.log('Versión Crockfor');
+})());
+
+// Unaria
+
++function() {
+	console.log('Versión Unaria');
+}();
+
+// Facebook
+!function() {
+	console.log('Versión Facebook');
+}();
