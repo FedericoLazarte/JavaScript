@@ -484,3 +484,56 @@ document.addEventListener("DOMContentLoaded", e => {
 });
 
 console.log("********** BOM Métodos **********");
+
+// alert(), confirm(), prompt(), todos de window.
+const $btnAbrir = document.getElementById("abrir-ventana");
+const $btnCerrar = document.getElementById("cerrar-ventana");
+const $btnImprimir = document.getElementById("imprimir-ventana");
+
+let ventana;
+
+$btnAbrir.addEventListener("click", e => {
+	ventana = window.open("https://jonmircha.com");
+
+});
+
+$btnCerrar.addEventListener("click", e => {
+	ventana.close();
+});
+
+$btnImprimir.addEventListener("click", e => {
+	window.print();
+});
+
+console.log("********** BOM: Objetos: URL, Historial y Navegador **********");
+
+console.log(location);
+console.log(location.origin);
+console.log(location.protocol);
+console.log(location.host);
+console.log(location.hostname);
+console.log(location.port);
+console.log(location.href);
+console.log(location.hash);
+console.log(location.seach);
+console.log(location.pathname);
+// location.reload()
+
+console.log(history);
+console.log(history.length);
+// console.log(history.forward);
+// console.log(history.go(2));
+// console.log(history.back(2));
+
+console.log(navigator);
+console.log(navigator.connection);
+console.log(navigator.geolocation);
+console.log(navigator.mediaDevices);
+console.log(navigator.mimeTypes);
+console.log(navigator.serviceWorker);
+console.log(navigator.onLine);
+console.log(navigator.storage);
+console.log(navigator.usb);
+console.log(navigator.userAgent);
+
+
