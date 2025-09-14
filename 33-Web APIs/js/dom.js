@@ -439,3 +439,48 @@ $linkEventos.addEventListener("click", e => {
 
 console.log("********** Delegación de Eventos **********");
 
+// Al delegar ya no necesitamos propagación
+document.addEventListener("click", (e) => {
+	console.log("Click en, ", e.target);
+
+	if (e.target.matches(".eventos-flujo div")) {
+		flujoEventos(e);
+	}
+
+	if (e.target.matches(".eventos-flujo a")) {
+		alert("Hola waaachum");
+		e.preventDefault();
+	}
+});
+
+console.log("********** BOM Propiedad y Eventos **********");
+
+window.addEventListener("resize", e => {
+	console.log("Evento resize");
+	console.log(window.innerWidth); // Tamaño ancho ventaja
+	console.log(window.innerHeight);
+	console.log(window.outerWidth);
+	console.log(window.outerHeight);
+});
+
+
+window.addEventListener("scroll", e => {
+	console.log("Evento Scroll");
+	console.log(window.scrollX);
+	console.log(window.scrollY);
+});
+
+window.addEventListener("load", e => {
+	console.log("Evento load");
+	console.log(window.screenX);
+	console.log(window.screenY);
+});
+
+// Este es más eficiente? pra peticiones asincrónas
+document.addEventListener("DOMContentLoaded", e => {
+	console.log("Evento DOMContentLoaded");
+	console.log(window.screenX);
+	console.log(window.screenY);
+});
+
+console.log("********** BOM Métodos **********");
