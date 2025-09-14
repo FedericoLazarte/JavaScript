@@ -265,3 +265,177 @@ meses.forEach(el => {
 document.write("<h3>Meses del Año</h3>");
 $ul3.appendChild($fragment);
 document.body.appendChild($ul3);
+
+
+console.log("********** Templates HTML **********");
+
+const $template = document.getElementById("template-card").content;
+const $fragmento = document.createDocumentFragment();
+const cardContent = [
+	{
+		title: "Tecnología",
+		img: "http://ximg.es/200x200/505/522"
+	},
+	{
+		title: "Animales",
+		img: "http://ximg.es/200x200/505/522"
+	},
+	{
+		title: "Arquitectura",
+		img: "http://ximg.es/200x200/505/522"
+	},
+	{
+		title: "Gente",
+		img: "http://ximg.es/200x200/505/522"
+	},
+	{
+		title: "Naturaleza",
+		img: "http://ximg.es/200x200/505/522"
+	},
+	{
+		title: "Tecnología",
+		img: "http://ximg.es/200x200/505/522"
+	},
+];
+
+cardContent.forEach(el => {
+	$template.querySelector("img").setAttribute("src", el.img);
+	$template.querySelector("img").setAttribute("alt", el.title);
+	$template.querySelector("figcaption").textContent = el.title;
+	// clonar estructura
+	let $clone = document.importNode($template, true);
+	$fragmento.appendChild($clone);
+});
+
+$cards.appendChild($fragmento);
+
+console.log("********** Modificando elementos Old Style **********");
+
+const $newCard = document.createElement("figure");
+
+$newCard.innerHTML = `
+	<img src="http://ximg.es/200x200/505/522" alt="Any"/>
+	<figcaption>Any</figcaption>
+`;
+
+$newCard.classList.add("card");
+
+$cards.replaceChild($newCard, $cards.children[2]);
+
+// insertar antes de ...
+$cards.insertBefore($newCard, $cards.firstElementChild);
+
+// eliminar
+$cards.removeChild($cards.lastElementChild);
+
+const $cloneCards = $cards.cloneNode(true);
+
+document.body.appendChild($cloneCards);
+
+console.log("********** Modificando elementos Cool Style **********");
+
+//$cards.insertAdjacentElement("beforebegin", $newCard);
+//$cards.insertAdjacentElement("afterbegin", $newCard);
+//$cards.insertAdjacentElement("beforeend", $newCard);
+$cards.insertAdjacentElement("afterend", $newCard);
+
+let $contenCard = `
+	<img src="http://ximg.es/200x200/505/522" alt="Any"/>
+	<figcaption></figcaption>
+`;
+
+$newCard.querySelector("figcaption").insertAdjacentText("afterbegin", "NONO");
+$newCard.insertAdjacentHTML("beforeend", $contenCard);
+
+
+//$cards.prepend($newCard);
+//$cards.append($newCard);
+//$cards.before($newCard);
+//$cards.after($newCard);
+
+console.log("********** Manejadores de Eventos **********");
+
+// Event handler
+function holaMundo() {
+	alert("Hola Mundo");
+	console.log(event);
+}
+
+const $eventoSemantico = document.getElementById("evento-semantico");
+
+// los eventos semánticos solo pueden usar una función
+$eventoSemantico.onclick = holaMundo; // Sin paréntesis la función
+$eventoSemantico.onclick = function(e) {
+	alert("Hola mundo Manejador de Eventos Semántico");
+	console.log(e);
+	console.log(event);
+}
+
+
+
+const $eventoMultiple = document.getElementById("evento-multiple");
+
+$eventoMultiple.addEventListener("click", holaMundo);
+$eventoMultiple.addEventListener("click", (e) => {
+	alert("Hola Mundo Manejador de Eventos Múltple");
+	console.log(e);
+	console.log(e.type);
+	console.log(e.target);
+	console.log(event);
+});
+
+console.log("********** Eventos con Parámetros y Remover Eventos **********");
+
+function saludar(nombre = "Desconocido/a") {
+	alert(`Hola ${nombre}`);
+}
+
+// Los eventos no deen tener parámetros que no sea event, me sale Hola [object PointerEvent]
+$eventoMultiple.addEventListener("click", saludar);
+
+// De esta manera sale Hola desconocido/a
+$eventoMultiple.addEventListener("click", () => {
+	saludar();
+	saludar("Federico");
+});
+
+// Elimar evento, solo con manejadores múltiples
+const $eventoRemover = document.getElementById("evento-remover");
+
+// Para remover no puede ser una función flecha o anónima
+
+const removerDobleClick = (e) => {
+	alert(`Removiendo el evento de tipo ${e.type}`);
+	console.log(e);
+	$eventoRemover.removeEventListener("dblclick", removerDobleClick);
+}
+$eventoRemover.addEventListener("dblclick",removerDobleClick);
+
+console.log("********** Flujo de Eventos (Burbuja y Captura) **********");
+
+const $divsEventos = document.querySelectorAll(".eventos-flujo div");
+console.log($divsEventos);
+
+function flujoEventos(e) {
+	console.log(`Hola te saluda ${this.className}, el click lo originó ${e.target.className}`);
+}
+
+$divsEventos.forEach(div => {
+	// false estamos en burbuja o sin especificar, con true es el modo captura
+	div.addEventListener("click", flujoEventos, false);
+});
+
+console.log("********** stopPropagation & preventDefault **********");
+
+// usar e.stoPropagation() en flujoEventos(e)
+
+const $linkEventos = document.querySelector(".eventos-flujo a");
+
+$linkEventos.addEventListener("click", e => {
+	alert("Hola baboso");
+	e.preventDefault();
+	e.stopPropagation();
+});
+
+console.log("********** Delegación de Eventos **********");
+
